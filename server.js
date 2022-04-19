@@ -12,6 +12,11 @@ app.route('/send')
     console.log(query.message)
     res.send('successfully sent http post');
 })
+.get(function(req, res) {
+    const query = req.query
+    console.log(query.message)
+    res.send('successfully sent http get');
+})
 
 app.listen(port, function () {
     console.log('chaat node js server listening on port 3000.');
