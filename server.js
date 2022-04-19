@@ -13,10 +13,6 @@ app.route('/send')
     res.send('successfully sent http post');
 })
 
-app.use(function(req, res, next) {
-    res.status(404).send("this route does not exist.");
-});
-
 app.listen(port, function () {
     console.log('chaat node js server listening on port 3000.');
 });
