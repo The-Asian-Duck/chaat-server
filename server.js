@@ -1,7 +1,15 @@
-var express = require('express');
-var app = express();
+const express = require('express');
 const bodyParser = require('body-parser');
-const port = 3000;
+const path = require('path');
+const http = require('http');
+const app = express();
+//For https
+const https = require('https');
+var fs = require('fs');
+var options = {
+  key: fs.readFileSync('ssl/private.key'),
+  cert: fs.readFileSync('ssl/certificate.crt')
+};
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -23,6 +31,7 @@ app.route('/send')
     res.send('successfully sent http get');
 })
 
-app.listen(port, function () {
-    console.log('chaat node js server listening on port 3000.');
-});
+
+
+http.createServer(app).listen(80)
+https.createServer(options, app).listen(443);
