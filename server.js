@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
+const bodyParser = require('body-parser');
 const port = 3000;
+
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', function (req, res) {
     res.send('chaat server');
@@ -8,13 +12,14 @@ app.get('/', function (req, res) {
 
 app.route('/send')
 .post(function(req, res) {
-    const query = req.query
-    console.log(query.message)
-    res.send('successfully sent http post');
+    const { username, msgString } = req.body;
+
+    console.log({username, msgString})
+    res.send({username, msgString});
 })
 .get(function(req, res) {
-    const query = req.query
-    console.log(query.message)
+    const bodyContent = req.body
+    console.log(bodyContent)
     res.send('successfully sent http get');
 })
 
